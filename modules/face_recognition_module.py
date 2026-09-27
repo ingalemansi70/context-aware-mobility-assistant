@@ -1,6 +1,6 @@
 import os
 import cv2
-import face_recognition
+import modules.face_recognition_module as face_recognition_module
 import numpy as np
 
 class FaceRecognizer:
@@ -22,9 +22,9 @@ class FaceRecognizer:
 
                 image_path = os.path.join(self.folder, filename)
 
-                image = face_recognition.load_image_file(image_path)
+                image = face_recognition_module.load_image_file(image_path)
 
-                encodings = face_recognition.face_encodings(image)
+                encodings = face_recognition_module.face_encodings(image)
 
                 if len(encodings) > 0:
                     self.known_face_encodings.append(encodings[0])
@@ -40,12 +40,12 @@ class FaceRecognizer:
     def recognize(self, frame):
         rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
-        face_locations = face_recognition.face_locations(
+        face_locations = face_recognition_module.face_locations(
             rgb_frame,
             model="hog"
         )
 
-        face_encodings = face_recognition.face_encodings(
+        face_encodings = face_recognition_module.face_encodings(
             rgb_frame,
             face_locations
         )
@@ -61,13 +61,13 @@ class FaceRecognizer:
 
             if len(self.known_face_encodings) > 0:
 
-                matches = face_recognition.compare_faces(
+                matches = face_recognition_module.compare_faces(
                     self.known_face_encodings,
                     face_encoding,
                     tolerance=0.50
                 )
 
-                distances = face_recognition.face_distance(
+                distances = face_recognition_module.face_distance(
                     self.known_face_encodings,
                     face_encoding
                 )
