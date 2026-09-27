@@ -5,3 +5,4 @@ __pycache__/
 known_faces/*
 !known_faces/README.md
 .ipynb_checkpoints/
+models/*.pt
