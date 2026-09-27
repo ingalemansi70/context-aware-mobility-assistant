@@ -1,0 +1,7 @@
+venv/
+__pycache__/
+*.pyc
+.vscode/
+known_faces/*
+!known_faces/README.md
+.ipynb_checkpoints/
